@@ -1,5 +1,5 @@
 {
-  "name": "redux-bundler",
+  "name": "@huygn/redux-bundler",
   "description": "Compose a Redux store out of smaller bundles of functionality.",
   "version": "22.2.0",
   "author": "Henrik Joreteg <henrik@joreteg.com> (joreteg.com)",

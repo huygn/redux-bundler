@@ -91,9 +91,19 @@ const composeBundles = (...bundles) => {
   const firstChunk = createChunk(bundles)
 
   return data => {
+    // add 'RESET' store action
+    const appReducer = combineReducers(firstChunk.reducers)
+    const initialState = appReducer({}, {})
+    const rootReducer = (state, action) => {
+      if (action.type === 'RESET') {
+        state = initialState
+      }
+      return appReducer(state, action)
+    }
+
     // actually init our store
     const store = createStore(
-      enableBatchDispatch(combineReducers(firstChunk.reducers)),
+      enableBatchDispatch(rootReducer),
       data,
       compose(
         customApplyMiddleware(
